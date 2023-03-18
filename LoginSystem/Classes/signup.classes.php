@@ -1,7 +1,9 @@
 <?php 
 
 class Sginup extends Dbh {
+
     public function checkUser($UserName, $UserEmail){ 
+    
         $stmt = $this->connect()->prepare('SELECT users_uid FROM Ho_Users WHERE users_id = ? OR users_email = ?;');
         if(!$stmt->execute(array($UserName, $UserEmail))){
             $stmt = null;
