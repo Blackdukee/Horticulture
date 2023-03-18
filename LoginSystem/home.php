@@ -2,7 +2,7 @@
 
 session_start();
 
-?> 
+?>
 
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="LoginSystem/cssfiles/index.css">
+    <link rel="stylesheet" href="cssfiles/index.css">
     <link rel="stylesheet" href="cssfiles/header.css">
 
     <title>Document</title>
@@ -45,23 +45,25 @@ session_start();
                 <a href="a" class="action_btn"><b>Get Started</b> </a>
                 <div class="toggle_btn">
                     <ul class="menu-member">
-                    <script></script>
-                        <?php 
-                        
-                        if(isset($_SESSION["UserName"])){
-                        
-                            
+                        <script></script>
+                        <?php
+
+                        if (isset($_SESSION["UserName"])) {
+
+
                         ?>
-                        <a href="#"><?php echo $_SESSION['UserName'] ?></a>
-                        <a href="includes/logout.inc.php" class="header-login-a"><button>Logout</button> </a>
-                        <?php 
-                        }else{
-                        
-                        
+                            <a href="#">
+                                <?php echo $_SESSION['UserName'] ?>
+                            </a>
+                            <a href="includes/logout.inc.php" class="header-login-a"><button>Logout</button> </a>
+                        <?php
+                        } else {
+
+
                         ?>
-                        <a href="#"><button>Sign up</button></a>
-                        <a href="#" class="header-login-a"><button>Login</button> </a>
-                        <?php 
+                            <a href="#"><button>Sign up</button></a>
+                            <a href="#" class="header-login-a"><button>Login</button> </a>
+                        <?php
                         }
                         ?>
                     </ul>

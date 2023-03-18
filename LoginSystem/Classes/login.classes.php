@@ -2,6 +2,7 @@
 
 class Login extends Dbh{
         
+        // fetch the user from the database
         public function getUser($UserName ,$UserEmail, $UserPassword){
             $stmt = $this->connect()->prepare('SELECT * FROM Ho_Users WHERE  users_email = ? ;');
             
@@ -16,6 +17,7 @@ class Login extends Dbh{
                 exit();
             }
             
+            //check if the password is correct 
             $pwdHashed =$stmt->fetchAll(PDO::FETCH_ASSOC);
             $checkPwd = password_verify($UserPassword, $pwdHashed[0]['users_pwd']);
             
@@ -24,6 +26,7 @@ class Login extends Dbh{
                 header("Location: ../login.php?error=wrongloginn");
                 exit();
             } else if($checkPwd == true){
+                
                 $stmt = $this->connect()->prepare('SELECT * FROM Ho_Users WHERE users_uid = ? OR users_email = ? AND users_pwd = ? ;');
                 
                 if(!$stmt->execute(array($UserName, $UserEmail, $UserPassword))){
