@@ -11,7 +11,7 @@ class Sginup extends Dbh {
             exit();
             
         }
-        $resultcheck =null ;
+        $resultcheck = null ;
         if($stmt->rowCount() > 0){
             $resultcheck = true;
         return $resultcheck;
@@ -19,7 +19,7 @@ class Sginup extends Dbh {
     }
     
     public function createUser($UserName, $UserEmail, $UserPassword){
-        $stmt = $this->connect()->prepare("INSERT INTO Ho_Users (users_uid, users_pwd, users_email) VALUES ( ?, ?, ?)");
+        $stmt = $this->connect()->prepare("INSERT INTO Ho_Users (users_uid, users_pwd, users_email, join_date) VALUES ( ?, ?, ?, NOW())");
         $hash_Pwd = password_hash($UserPassword, PASSWORD_DEFAULT);
         if(!$stmt->execute(array($UserName, $hash_Pwd, $UserEmail))){
             $stmt = null;

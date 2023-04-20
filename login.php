@@ -11,8 +11,8 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="cssfiles/index.css">
-    <link rel="stylesheet" href="cssfiles/header.css">
+    <link rel="stylesheet" href="http://localhost/Horticulture/LoginSystem/cssfiles/index.css">
+    <link rel="stylesheet" href="http://localhost/Horticulture/LoginSystem/cssfiles/header.css">
     <title>Document</title>
 
 
@@ -26,7 +26,7 @@ session_start();
 
             <div class="form-value">
                 <!-- the login form is starting from  here  -->
-                <form action="includes/login.inc.php" method="post">
+                <form action="LoginSystem/includes/login.inc.php" method="post">
 
                     <h2>Login</h2>
                     <div class="inputbox">
@@ -35,11 +35,7 @@ session_start();
                         <label for="">Email</label>
 
                     </div>
-                    <div class="inputbox">
-                        <ion-icon name="people-outline"></ion-icon>
-                        <input type="text" name="UserName" id="" required>
-                        <label for="">Username</label>
-                    </div>
+                
                     <div class="inputbox">
                         <ion-icon name="lock-closed-outline"></ion-icon>
                         <input type="password" name="UserPassword" id="" required>
@@ -49,7 +45,7 @@ session_start();
                     <div class="forget">
                         <label for="">
                         <input type="hidden" name="rememberme" value ="off">
-                        <input type="checkbox" name="rememberme" id="rememberme">Remember Me <a href="a"> Forget Password</a>
+                        <input type="checkbox" name="rememberme" id="rememberme">Remember Me <a href="reset-password.php"> Forget Password</a>
                         </label>
 
                     </div>

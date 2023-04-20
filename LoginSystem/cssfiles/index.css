@@ -10,7 +10,7 @@ body {
 
     height: 100hv;
     background-color: black;
-    background: url(/imgs/pexels-irina-iriser-1379640.jpg) no-repeat;
+    background: url("/Horticulture/LoginSystem/imgs/one.jpg") no-repeat;
     background-position: center;
     background-size: cover;
 }
@@ -26,11 +26,11 @@ section {
 
 /*this is for the form div  */
 .form-box {
-    
+
     position: relative;
     width: 400px;
     height: fit-content;
-    background: white ;
+    background: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -125,8 +125,8 @@ input:valid~label {
     font-weight: 600;
 }
 
-button p{
-    color:black;
+button p {
+    color: black;
 }
 
 /* this is for the register div */

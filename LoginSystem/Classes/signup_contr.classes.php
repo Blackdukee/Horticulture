@@ -1,10 +1,13 @@
 <?php
 class SignupContr extends Sginup {
+
     private $UserName;
     private $UserEmail;
     private $UserPassword;
     private $UserPasswordRe;
+    
     public function __construct($UserName, $UserEmail, $UserPassword, $UserPasswordRe) {
+    
         $this->UserName = $UserName;
         $this->UserEmail = $UserEmail;
         $this->UserPassword = $UserPassword;
