@@ -7,16 +7,23 @@ if(isset($_POST['submit'])){
     $email = $_POST['UserEmail'];
     $password = $_POST['UserPassword'];
     $passwordRe = $_POST['re_password'];
+    $phone = $_POST['Phone'];
+    $rembmerme = $_POST['rememberme'];
     
 }
     //instantiating the signupContr class
     include "../Classes/dbh.classes.php";
     include "../Classes/signup.classes.php";
     include "../Classes/signup_contr.classes.php";    
-    $signup = new SignupContr($name, $email, $password, $passwordRe);
+    include "../Classes/login.classes.php";
+    include "../Classes/login_contr.classes.php";
+    $signup = new SignupContr($name, $email,$phone, $password, $passwordRe);
     $signup->signupUser();
     
+    $login =loginContr::forLogin($name, $email, $password,$rembmerme);
+    $login->getUser($name, $email, $password,$rembmerme);
+
     // Going to back to front page 
-    header("Location: ../signup.php?error=none");
+    header("Location: /Horticulture/home.php?error=none");
     
     ?>

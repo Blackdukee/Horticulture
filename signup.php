@@ -8,8 +8,8 @@
 
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/LoginSystem/cssfiles/index.css">
-    <link rel="stylesheet" href="/LoginSystem/cssfiles/header.css">
+    <link rel="stylesheet" href="/Horticulture/LoginSystem/cssfiles/index.css">
+    <link rel="stylesheet" href="/Horticulture/LoginSystem/cssfiles/header.css">
 </head>
 
 <body>
@@ -23,7 +23,7 @@
                     document.getElementById('PassIcon').style.color = 'green';
                     document.getElementById('RePassIcon').style.color = 'green';
                 } else {
-
+                
                     document.getElementById('PassIcon').style.color = 'red';
                     document.getElementById('RePassIcon').style.color = 'red';
 
@@ -38,19 +38,27 @@
 
             <div class="form-value">
                 <!-- the login form is starting from  here  -->
-                <form action="/LoginSystem/includes/signup.inc.php" method="post">
+                <form action="/Horticulture/LoginSystem/includes/signup.inc.php" method="post">
 
                     <h2>Register</h2>
-                    <div class="inputbox">
-                        <ion-icon name="people-outline"></ion-icon>
-                        <input type="text" name="UserName" id="" required>
-                        <label for="">Username</label>
-                    </div>
+                    
                     <div class="inputbox">
                         <ion-icon name="mail-outline"></ion-icon>
                         <input type="email" name="UserEmail" id="" required>
                         <label for="">Email</label>
 
+                    </div>
+                    
+                    <div class="inputbox">
+                        <ion-icon name="people-outline"></ion-icon>
+                        <input type="text" name="UserName" id="" required>
+                        <label for="">Username</label>
+                    </div>
+
+                    <div class="inputbox">
+                        <ion-icon name="call-outline"></ion-icon>   
+                        <input type="text" name="Phone" id="" required>
+                        <label for="">Phone</label>
                     </div>
 
                     <div class="inputbox">
@@ -62,6 +70,14 @@
                         <ion-icon name="lock-closed-outline" id="RePassIcon"></ion-icon>
                         <input type="password" name="re_password" id="re_password" required onkeyup="check();">
                         <label for="">Re-password</label>
+                        
+                    </div>
+                    <div class="forget">
+                        <label for="">
+                        <input type="hidden" name="rememberme" value ="off">
+                        <input type="checkbox" name="rememberme" id="rememberme">Remember Me <a href="reset-password.php"> Forget Password</a>
+                        </label>
+
                     </div>
                     <input type="submit" class="submit" name="submit" value="Register">
                     <div class="register">
@@ -76,7 +92,7 @@
 
 
 
-    <!-- this is the link for the ionicons to get icons -->
+    <!-- these are links for the ionicons to get icons -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 

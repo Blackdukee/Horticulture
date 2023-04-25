@@ -3,13 +3,15 @@ class SignupContr extends Sginup {
 
     private $UserName;
     private $UserEmail;
+    private $UserPhone;
     private $UserPassword;
     private $UserPasswordRe;
     
-    public function __construct($UserName, $UserEmail, $UserPassword, $UserPasswordRe) {
+    public function __construct($UserName, $UserEmail,$UserPhone, $UserPassword, $UserPasswordRe) {
     
         $this->UserName = $UserName;
         $this->UserEmail = $UserEmail;
+        $this->UserPhone = $UserPhone;
         $this->UserPassword = $UserPassword;
         $this->UserPasswordRe = $UserPasswordRe;
     }
@@ -20,26 +22,39 @@ class SignupContr extends Sginup {
             exit();
         }
         if($this->invalidUid() !== false){
-            header("Location: ../signup.php?error=invaliduid");
+            header("Location: /Horticulture/signup.php?error=invaliduid");
             exit();
         }
         if($this->invalidEmail() !== false){
-            header("Location: ../signup.php?error=invalidemail");
+            header("Location: /Horticulture/signup.php?error=invalidemail");
             exit();
         }
         if($this->pwdMatch() !== false){
-            header("Location: ../signup.php?error=passwordsdontmatch");
+            header("Location: /Horticulture/signup.php?error=passwordsdontmatch");
             exit();
         }
         if($this->uidTakenCheck() !== false){
-            header("Location: ../signup.php?error=usertaken");
+            header("Location: /Horticulture/signup.php?error=usertaken");
             exit();
         }
-        $this->createUser($this->UserName, $this->UserEmail, $this->UserPassword);
+        if($this->invalidPhone() !== false){
+            header("Location: /Horticulture/signup.php?error=invalidphone");
+            exit();
+        }
+        $this->createUser($this->UserName, $this->UserEmail,$this->UserPhone,$this->UserPassword);
+    }
+    public function invalidPhone(){
+        $result = false;
+        if(!preg_match("/^[0-9]*$/", $this->UserPhone)){
+            $result = true;
+        } else {
+            $result = false;
+        }
+        return $result;
     }
     public function emptyInput() {
         $result = null;
-        if(empty($this->UserName) || empty($this->UserEmail) || empty($this->UserPassword) || empty($this->UserPasswordRe)){
+        if(empty($this->UserName) || empty($this->UserEmail) || empty($this->UserPassword) || empty($this->UserPasswordRe || empty($this->UserPhone))){
             $result = true;
         } else {
             $result = false;

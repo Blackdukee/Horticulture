@@ -49,22 +49,26 @@ $testo = new rememberMe();
                     <ul class="menu-member">
                         <script></script>
                         <?php
-
+                        try {
+                            $testo->isCoocieValid();
+                        } catch (Exception $e) {
+                            echo $e->getMessage();
+                        }
                         if (isset($_SESSION["UserName"])||$testo->isCoocieValid()) {
 
 
                         ?>
-                            <a href="#">
+                            <a href="/Horticulture/account-settings/index.php">
                                 <?php echo $_SESSION['UserName'] ?>
                             </a>
-                            <a href="LoginSystem\includes\logout.inc.php" class="header-login-a"><button>Logout</button> </a>
+                            <a href="/Horticulture/LoginSystem/includes/logout.inc.php" class="header-login-a"><button>Logout</button> </a>
                         <?php
                         }else {
 
 
                         ?>
-                            <a href="#"><button>Sign up</button></a>
-                            <a href="#" class="header-login-a"><button>Login</button> </a>
+                            <a href="/Horticulture/signup.php"><button>Sign up</button></a>
+                            <a href="/Horticulture/login.php" class="header-login-a"><button>Login</button> </a>
                         <?php
                         }
                         ?>

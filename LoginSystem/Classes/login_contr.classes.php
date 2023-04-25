@@ -7,11 +7,20 @@ class loginContr extends Login{
     Private $UserEmail;
     Private $rememberme;
     
-    public function __construct($UserName, $UserEmail, $UserPassword , $rememberme) {
-        $this->UserName = $UserName;
-        $this->UserEmail = $UserEmail;
-        $this->UserPassword = $UserPassword;
-        $this->rememberme = $rememberme;
+    private function __construct() {
+    
+    }
+    public static function forLogin($UserName, $UserEmail, $UserPassword , $rememberme){
+        $instance = new self();
+        $instance->$UserName = $UserName;
+        $instance->$UserEmail = $UserEmail;
+        $instance->$UserPassword = $UserPassword;
+        $instance->$rememberme = $rememberme;
+        return $instance;
+    }
+    public static function forUpdatePassword(){
+        $instance = new loginContr();
+        return  $instance;
     }
     
     // login user to the system
@@ -22,6 +31,7 @@ class loginContr extends Login{
         }
         $this->getUser($this->UserName,$this->UserEmail, $this->UserPassword,$this->rememberme);
     }
+    
     //check if the user password or name inputs are empty
     private function emptyInput(){
         $result = null;
@@ -32,4 +42,5 @@ class loginContr extends Login{
         }
         return $result;
     }
+    
 }

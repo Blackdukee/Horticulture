@@ -16,9 +16,9 @@ include "../Classes/login.classes.php";
 include "../Classes/login_contr.classes.php";
 
 
-$signup = new loginContr($name, $email, $password,$rembmerme);
+$signup = loginContr::forLogin($name, $email, $password,$rembmerme);
 $signup->getUser($name, $email, $password,$rembmerme);
 
 
 // Going to back to front page 
-header("Location: http://localhost/Horticulture/home.php?error=none");
+header("Location: /Horticulture/home.php?error=none");

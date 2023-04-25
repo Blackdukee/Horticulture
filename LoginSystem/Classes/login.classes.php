@@ -1,5 +1,5 @@
 <?php 
-include "remember.php";
+include "C:\\xampp\htdocs\Horticulture\LoginSystem\includes\\remember.php";
 
 
 class Login extends Dbh{
@@ -21,6 +21,7 @@ class Login extends Dbh{
             
             //check if the password is correct 
             $pwdHashed =$stmt->fetchAll(PDO::FETCH_ASSOC);
+            $tee = $pwdHashed[0]['users_pwd'];
             $checkPwd = password_verify($UserPassword, $pwdHashed[0]['users_pwd']);
             
             if($checkPwd == false){
@@ -43,13 +44,68 @@ class Login extends Dbh{
                 $testo->remember($pwdHashed[0]['users_id']);
                 
                 }
+                
                 session_start();
                 $_SESSION['userid'] = $pwdHashed[0]['users_id'];
                 $_SESSION['UserName'] = $pwdHashed[0]['users_uid'];
+                $_SESSION['UserEmail'] = $pwdHashed[0]['users_email'];
+                $_SESSION['UserPhone'] = $pwdHashed[0]['users_phone'];
+            if($pwdHashed[0]['users_address'] == null){
+                $_SESSION['UserAddress'] = "Not set";
+            } else {
+                $_SESSION['UserAddress'] = $pwdHashed[0]['users_address'];
+            
+            }
+            if ($pwdHashed[0]['user_img'] == null) {
+                $_SESSION['UserImg'] = "Not set";
+            }else{ 
+                $_SESSION['UserImg'] = $pwdHashed[0]['user_img'];
+            }
+               
                 $stmt = null;
                 header("Location: /Horticulture/home.php?error=none");
                 exit();
             }
         }
+        public function UpdatePassword($oldPass,$NewPass,$checkpass,$UserEmail){
+
+            if($this->checkOldPass($oldPass,$UserEmail) == true ){
+                    if ($oldPass != $NewPass) {
+                
+                        if ($NewPass != $checkpass) {
+                            header("Location: /Horticulture/account-settings/index.php?error=passwordnotmatch");
+                            exit();
+                        }
+                        $stmt = $this->connect()->prepare('UPDATE Ho_Users SET users_pwd = ? WHERE users_email = ? ;');
+                        $hash_Pwd = password_hash($NewPass, PASSWORD_DEFAULT);
+                        if(!$stmt->execute(array($hash_Pwd, $UserEmail))){
+                            $stmt = null;
+                            header("Location: /Horticulture/account-settings/index.php?error=stmtfailed");
+                            exit();
+                        }
+                        
+                        
+                    }
+            
+            }
         
+        }
+        
+        public function checkOldPass($oldPass,$UserEmail)
+        {
+            $stmt = $this->connect()->prepare('SELECT users_pwd FROM Ho_Users WHERE  users_email = ? ;');
+            
+            if(!$stmt->execute(array($UserEmail))){
+            $stmt = null;
+            header("Location: /Horticulture/login.php?error=stmtfailed");
+            exit();
+            }
+            
+            
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);  
+            $oldcheck = $row['users_pwd'];
+            $ceckpass = password_verify($oldPass, $row['users_pwd']);
+            return $ceckpass;
+
+        }
 }

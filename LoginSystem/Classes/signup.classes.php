@@ -7,7 +7,7 @@ class Sginup extends Dbh {
         $stmt = $this->connect()->prepare('SELECT users_uid FROM Ho_Users WHERE users_id = ? OR users_email = ?;');
         if(!$stmt->execute(array($UserName, $UserEmail))){
             $stmt = null;
-            header("Location: ../signup.php?error=stmtfailed");
+            header("Location: /Horticulture/signup.php?error=stmtfailed");
             exit();
             
         }
@@ -18,12 +18,15 @@ class Sginup extends Dbh {
         }
     }
     
-    public function createUser($UserName, $UserEmail, $UserPassword){
-        $stmt = $this->connect()->prepare("INSERT INTO Ho_Users (users_uid, users_pwd, users_email, join_date) VALUES ( ?, ?, ?, NOW())");
+    public function createUser($UserName, $UserEmail,$UserPhone, $UserPassword){
+        $stmt = $this->connect()->prepare("INSERT INTO Ho_Users 
+                                            (users_uid, users_pwd, users_email, join_date, users_phone, user_img, users_address ) 
+                                            VALUES ( ?, ?, ?, NOW(), ?,'Not Set', 'Not Set')");
+        
         $hash_Pwd = password_hash($UserPassword, PASSWORD_DEFAULT);
-        if(!$stmt->execute(array($UserName, $hash_Pwd, $UserEmail))){
+        if(!$stmt->execute(array($UserName, $hash_Pwd, $UserEmail, $UserPhone))){
             $stmt = null;
-            header("Location: ../signup.php?error=stmtfailed");
+            header("Location: /Horticulture/signup.php?error=stmtfailed");
             exit();
         }
         $stmt = null;
