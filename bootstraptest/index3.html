@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- FontAwesome 6.2.0 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <!-- (Optional) Use CSS or JS implementation
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js"
+    integrity="sha512-naukR7I+Nk6gp7p5TMA4ycgfxaZBJ7MO5iC3Fp6ySQyKFHOGfpkSZkYVWV5R7u7cfAicxanwYQ5D1e17EfJcMA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled">Disabled</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    
+    
+    <div class="container">
+        <div class="gridsys">
+
+        </div>
+    </div>
+    
+    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="">
+
+
+
+        function fetch_data(page) {
+            let container = document.querySelector('.container');
+            $.ajax({
+                url: "pagination.php",
+                method: "POST",
+                data: { page: page },
+
+                success: function (data) {
+                    // makaing the returned data into a dom object
+                    let two = new DOMParser().parseFromString(data, "text/html");
+
+                    globalThis.itemSize = two.querySelectorAll('.fa-heart').length;
+                    // getting the heart icons from the dom object
+                    globalThis.fav = two.querySelectorAll('.fa-heart');
+
+                    // getting the json array from the dom object
+                    let array = two.querySelector('jsontag');
+
+                    // making the json array global which is the array of favorties items 
+                    globalThis.jsonarray = JSON.parse(array.textContent);
+
+                    $('.gridsys').html(two.querySelectorAll('.col'));
+                    //prevent the pagination from being duplicated
+                    if (container.hasChildNodes(two.querySelector('.pagination'))) {
+                        container.removeChild(container.lastChild);
+                        container.appendChild(two.querySelector('.pagination'));
+                    }
+                }
+            });
+        };
+
+        fetch_data();
+
+        $(document).on('click', '.page-item', function () {
+            var page = $(this).attr("id");
+            fetch_data(page);
+        });
+
+
+        // prevent the user from clicking the heart icon too fast
+        let lastClickTime = new Date().getTime();
+
+
+        // when the user clicks the heart icon
+        $(document).on('click', '.fa-heart', function () {
+            // get the heart icon
+            let heart = $(this);
+            // get the id of the heart icon
+            let id = heart.attr("id");
+            // get the last digit of the id which is the id of the item
+            globalThis.digitid = +id[id.length - 1];
+            // get the items from the json array
+
+            const currentTime = new Date().getTime();
+            if (currentTime - lastClickTime < 600) {
+                return; // Ignore the click if it was too soon after the last one
+            }
+
+            pressed(heart[0]);
+            console.log("clicked");
+            lastClickTime = currentTime;
+
+        });
+
+
+        function pressed(heart) {
+
+
+            if (heart.classList.contains("fa-regular")) {
+
+                heart.classList.toggle("fa-bounce");
+                // make it move for 1 second
+                setTimeout(function () {
+                    heart.classList.toggle("fa-bounce");
+                }, 1000);
+
+                heart.classList.remove("fa-regular");
+                heart.classList.add("fa-solid");
+
+                $.ajax({
+                    url: "items.php",
+                    method: "POST",
+                    data: { id: digitid, remove: false },
+                    success: function (data) {
+                        console.log(data);
+                        stringofid = digitid.toString();
+                        console.log(stringofid);
+                        jsonarray.push(stringofid);
+                        console.log(jsonarray);
+                        array.push(digitid);
+                        console.log(array);
+
+                    }
+                });
+
+            } else {
+                heart.classList.toggle("fa-bounce");
+                setTimeout(function () {
+                    heart.classList.toggle("fa-bounce");
+                }, 1000);
+                heart.classList.remove("fa-solid");
+                heart.classList.add("fa-regular");
+                $.ajax({
+                    url: "items.php",
+                    method: "POST",
+                    data: { id: digitid, remove: true },
+                    success: function (data) {
+                        console.log(data);
+                        jsonarray = jsonarray.filter(item => item !== digitid.toString());
+                        array = array.filter(item => item !== digitid);
+                        console.log(array);
+                        console.log(jsonarray);
+                    }
+                });
+            }
+
+
+        }
+
+        function ifINFavorites(fav) {
+
+            let heart = fav;
+            let heartarray = Array.from(heart);
+            globalThis.array = [];
+
+            for (let i = 0; i < jsonarray.length; i++) {
+                array.push(+jsonarray[i]);
+            }
+            console.log(array);
+            for (let i = 0; i < itemSize; i++) {
+                if (array.includes(+heartarray[i].id[heartarray[i].id.length - 1])) {
+                    heartarray[i].classList.remove("fa-regular");
+                    heartarray[i].classList.add("fa-solid");
+                }
+            }
+
+        }
+
+        $(document).ajaxComplete(function () {
+            ifINFavorites(fav);
+        });
+    </script>
+</body>
+
+</html>

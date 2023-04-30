@@ -2,10 +2,10 @@
 class Dbh {
     protected function connect(){ 
         try{
-        $username = "root"; 
+        $username = "brilliant"; 
         $password = "2112002";
-        $dbName = "horticulturedb";
-        $dbh = new PDO('mysql:host=localhost;dbname=horticulturedb', $username, $password);
+        $dbName = "horticulture";
+        $dbh = new PDO('mysql:host=localhost;dbname=horticulture', $username, $password);
         return $dbh;
         
         }catch(PDOException $e){
@@ -14,5 +14,18 @@ class Dbh {
         }
     }
     
+    public function showFavArticles($id){
+        $dbh = $this->connect();
+        $sql = "SELECT * FROM `articles` WHERE `article_id` in (SELECT `article_id` FROM `favorites` WHERE `users_id` = ?)";
+        $stmt = $dbh->prepare($sql);
+        
+        if($stmt->execute([$id])){
+            $result = $stmt->fetchAll();
+            return $result;
+        }else{
+            echo "Error: " . $sql . "<br>" ;
+        }
+        
+    }
     
 }

@@ -1,0 +1,152 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- FontAwesome 6.2.0 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+        
+        
+    <div class="container" style="width:400px; position: relative;top: 200px;">
+    <form id="imgform">
+        <div class="input-group mb-3">
+            <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon03">Cancle</button>
+            <input type="file" id="itemimg" class="form-control"  name="file" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03"
+                aria-label="Upload">
+            <button class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04">Upload</button>
+    
+        </div>
+
+        <div class="input-group flex-nowrap">
+            <span class="input-group-text" id="addon-wrapping">@</span>
+            <input type="text" id="itemname" class="form-control input-field" name="name" placeholder="Plant name" aria-label="Username"
+                aria-describedby="addon-wrapping">
+        </div>
+        <div class="input-group flex-nowrap" style="margin-top: 20px;">
+            <span class="input-group-text" id="addon-wrapping">@</span>
+            <input type="text" id="itemtype" class="form-control input-field" name="type" placeholder="Platn type" aria-label="Username"
+                aria-describedby="addon-wrapping">
+        </div>
+        <div class="input-group mb-3" style="margin-top: 20px;">
+            <span class="input-group-text">$</span>
+            <span class="input-group-text">0.00</span>
+            <input type="text" id="itemprice" class="form-control input-field" name="price" aria-label="Dollar amount (with dot and two decimal places)">
+        </div>
+        <div class="input-group mb-3" style="margin-top: 20px;">
+            <span class="input-group-text">$</span>
+            <span class="input-group-text">0.00</span>
+            <input type="text" id="itemquantity" class="form-control input-field" name="quantity" aria-label="Dollar amount (with dot and two decimal places)">
+        </div>
+    
+        <div class="input-group">
+            <span class="input-group-text">With textarea</span>
+            <textarea class="form-control" id="itemdesc" name="desc" aria-label="With textarea">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae aliquam sunt dolores quo tempora modi, id
+            reiciendis veritatis a necessitatibus consequuntur quas placeat ratione temporibus accusamus officiis laboriosam quaerat
+            repellendus.
+            </textarea>
+        </div>
+    </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    
+    let itemimg = document.getElementById('itemimg');
+    let itemname = document.getElementById('itemname');
+    let itemdesc = document.getElementById('itemdesc');
+    let itemprice = document.getElementById('itemprice');
+    let itemtype = document.getElementById('itemtype');
+    let itemquantity = document.getElementById('itemquantity');
+    let Cancle = document.getElementById('inputGroupFileAddon03');
+    let Upload = document.getElementById('inputGroupFileAddon04');
+    let inputFields = document.querySelectorAll('.input-field');
+    
+    inputFields.forEach((input, index) => {
+        input.addEventListener('keydown', (event) => {
+            if (event.keyCode === 13) { // Enter key
+                const nextInput = inputFields[index + 1];
+                if (nextInput) {
+                    nextInput.focus();
+                }
+                event.preventDefault();
+            }
+        });
+    });
+    
+    Cancle.addEventListener('click',()=>{
+        itemimg.value = '';
+    })
+    
+    
+    $('#imgform').submit(function(evt){
+    
+        evt.preventDefault();
+        let img = itemimg.files[0];
+        let name = itemname.value.replace(/\s+/g, '');
+        let desc = itemdesc.value.replace(/\s+/g, '');
+        let price = itemprice.value.replace(/\s+/g, '');
+        let quantity = itemquantity.value.replace(/\s+/g, '');
+        let type = itemtype.value.replace(/\s+/g, '');
+       var formdata = new FormData($(this)[0]);
+
+        
+        console.log(name)
+        
+        if(img == '' || name == '' || desc == '' || price == '' || quantity == '' || type == ''){
+            alert('Please fill all the fields');
+            return;
+        }else if (img.type != 'image/jpeg' && img.type != 'image/png' && img.type != 'image/jpg' && img.type != 'image/gif') {
+                alert('Please upload a valid image file');
+        } else if ( img.size > 2000000) {
+                alert('Max Upload size is 2MB only');
+                
+        }else if (price < 0 || quantity < 0) {
+                alert('Price and Quantity must be greater than 0');
+        }else if (price > 1000 || quantity > 101) {
+                alert('Price and Quantity must be less than 1000000');
+        }else if ( isNaN(price) || isNaN(quantity)) {
+                alert('Price and Quantity must be a number');
+        }else if (name.length > 40 || desc.length > 1000) {
+                alert('Name must be less than 40 characters and Description must be less than 1000 characters');
+        }
+        
+      $.ajax({
+            url: 'insertitems.php',
+            type: 'POST',
+            data: formdata,
+            async: false,
+            cache: false,
+            contentType: false,
+            enctype: 'multipart/form-data',
+            processData: false,
+            success: function (response) {
+                alert(response);
+              
+            }
+        });
+        return false;
+     
+    });
+    
+
+    </script>
+    
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+        
+</body>
+
+</html>

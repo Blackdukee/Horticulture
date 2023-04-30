@@ -201,11 +201,13 @@ if(isset($_POST['submit'])){
           processData: false,
           success: function (response) {
              alert("updated successfully");
-             var img = response.slice(response.indexOf("base64")+7,response.indexOf('alt="image"')-2);
-             $("#profileimg").attr('src', 'data:image/jpg;charset=utf8;base64,'+img)
-            
-                
-     
+             var parser = new DOMParser();
+		     var responseHtml = parser.parseFromString(response, "text/html");  // Parse the AJAX response as HTML using the DOMParser API
+		     var myElement = responseHtml.getElementById("profileimg");  // Select the desired HTML element using standard DOM APIs
+		
+             $("#profileimg").attr('src', myElement.getAttribute("src"));
+	             // Extract the date string from the HTML using a DOM API selector
+               
           }
        });
 
