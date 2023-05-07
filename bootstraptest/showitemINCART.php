@@ -4,7 +4,7 @@
 $servername = "localhost";
 $username = "brilliant";
 $password = "2112002";
-$dbname = "horticulturedb";
+$dbname = "horticulture";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -18,31 +18,115 @@ if ($conn->connect_error) {
 if(isset($_POST['id'])){
     $itemid = $_POST['id'];
     $userid = 1;
+    if(isset($_POST['val'])){
+        $val = $_POST['val'];
+    
+    }else{
+        $val = null;
+    }
 }
 
 // insert data into cart table
-$query = mysqli_query($conn,"INSERT INTO `cart`(`users_id`, `product_id`) VALUES ($userid,$itemid)");
 
 
-$query = mysqli_query($conn,"SELECT  FROM `cart`");
+$query = mysqli_query($conn,"SELECT product_id FROM `cart` where `user_id` = 1");
 
-$output = '<div class="row g-0">
-              <div class="col-md-4">
-                <img src="silent_voice.png" class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body" style="height: 100px;">
-            
-                  <h5 class="card-title">Platn name</h5>
-                  <p class="card-text"><b>$34</b></p>
-                  <p class="card-text" style="margin-top: -19px;">Remove</p>
-                  <div class="form-outline">
-                    <input type="number" id="typeNumber" class="form-control" min="1" max="100" value="1" />
-                    <label class="form-label" for="typeNumber">Quantity</label>
-                  </div>
-                </div>
-              </div>
-            </div>';    // this is the output of the cart item
+// Make an array of the cart items ids
+
+$arrayOfCartItems = array();
+
+
+if(mysqli_num_rows($query) > 0){
+    while($row = mysqli_fetch_array($query)){
+        array_push($arrayOfCartItems,$row['product_id']);
+    }
+}
+
+$output = '';    // this is the output of the cart item
+               
+
+if ($arrayOfCartItems == null) {
+  $output = '<h3 class="empty">Cart is empty</h3>';
+  echo $output;
+  exit();
+
+}
+$query2  = mysqli_query($conn,"SELECT * FROM `product` where `product_id` in (".implode(',',$arrayOfCartItems).")");
+
+
+
+ 
                 
+if(mysqli_num_rows($query2) > 0){
+   
+   while($row2 = mysqli_fetch_array($query2)){
+
+    // $output .= '<div class="card mb-3" >
+    //             <div class="row g-0" name="cardincart">
+    //               <div class="col-md-4" style="width:100px">
+    //                 <img src="imgs2/'.$row2['product_img'].'" class="img-fluid rounded-start" alt="image" style="height:118px;">
+    //               </div>
+    //               <div class="col-md-8">
+    //                 <div class="card-body" style="height: 120px;">
                 
+    //                   <h5 class="card-title">' . $row2['product_name'] . '</h5>
+    //                   <p class="card-text"><b>$' . $row2['product_price'] . '</b></p>
+    //                   <p  class="card-textRemove" id="itemToRemove'.$row2['product_id'].'" style="margin-top: -19px;width:60px;" >Remove</p>
+                    
+    //                 </div>
+    //               </div>
+    //             </div>
+    //           </div>';
+        if ($val != null) {
+            $output .= '<div class="card mb-3">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="col-md-4" style="width:100px">
+                                <img src="imgs2/' . $row2['product_img'] . '" class="img-fluid rounded-start itemImgInCart" alt="image" >
+                                </div>
+                                <div class="card-desc">
+                                       <h5 class="card-title">' . $row2['product_name'] . '</h5>
+                                        <p class="card-text"><b>Price: $' . $row2['product_price'] . '</b></p>
+                                        <p  class="card-textRemove" id="itemToRemove' . $row2['product_id'] . '" style="margin-top: -19px;width:60px;" >Remove</p>
+                                </div>
+                                <div class="input-group mr-3">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary minusbtn"  id="minusbtn' . $row2['product_id'] . '" type="button">-</button>
+                                    </div>
+                                    <input type="number" id="inputnumber' . $row2['product_id'] . '" class="form-control inputnumber" value="' . $val . '" min="1" max="100">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary addbtn"  id="addbtn' . $row2['product_id'] . '"  type="button">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>';
+        }else{
                 
+                    $output .= '<div class="card mb-3">
+                            <div class="card-body d-flex align-items-center">
+                                <div class="col-md-4" style="width:100px">
+                                <img src="imgs2/' . $row2['product_img'] . '" class="img-fluid rounded-start itemImgInCart" alt="image" >
+                                </div>
+                                <div class="card-desc">
+                                       <h5 class="card-title">' . $row2['product_name'] . '</h5>
+                                        <p class="card-text"><b>Price: $' . $row2['product_price'] . '</b></p>
+                                        <p  class="card-textRemove" id="itemToRemove' . $row2['product_id'] . '" style="margin-top: -19px;width:60px;" >Remove</p>
+                                </div>
+                                <div class="input-group mr-3">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary minusbtn"  id="minusbtn' . $row2['product_id'] . '" type="button">-</button>
+                                    </div>
+                                    <input type="number" id="inputnumber' . $row2['product_id'] . '" class="form-control inputnumber" value="1" min="1" max="100">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary addbtn"  id="addbtn' . $row2['product_id'] . '"  type="button">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>';
+        
+        }
+   }
+   
+
+}
+
+echo $output;

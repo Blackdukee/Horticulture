@@ -1,0 +1,231 @@
+
+
+
+
+
+[name="addbutton"] { 
+    position: relative;
+}
+
+
+.fa-cart-plus {
+
+    position: relative;
+    top: 20px;
+    right: 10px;
+    color:#df1638;
+}
+
+.itemsgrid {
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px 30px;
+    width: fit-content;
+}
+
+
+.form-outline {
+   width: fit-content;
+
+}
+
+.pagination {
+    margin-top: 30px;
+}
+
+.model-body {
+    margin-bottom: -20px;
+}
+
+.card-title a{
+    text-decoration: none;
+    color:black;
+
+}
+.card i {
+    align-items: right;
+}
+   .intro {
+
+   background-color: #d0d4ca;
+   width: 100%;
+   height: 350px;
+
+   }
+
+   .bg {
+
+   position: relative;
+   height: inherit;
+   width: 60%;
+   left: 40%;
+   }
+
+   .bg img {
+
+   height: 350px;
+
+
+   }
+.category{ 
+    display: flex;
+    position: relative;
+}
+.cat { 
+    
+    position: relative;
+    height: 65px;
+    width: 90%;
+    left: 5%;
+    margin-bottom: 15px;
+}
+
+.catnav { 
+    position: relative;
+        height: 65px;
+        width: 90%;
+        left: 5%;
+        margin-bottom: 15px;
+}
+.spinner-border {
+    position: relative;
+    top: 50%;
+    left: 45%;
+    right: 50%;
+}
+
+
+.container2 {
+        display: flex;
+        position: relative;
+        width: 100%;
+        justify-content: center;
+}
+.containerr{
+
+    display: flex;
+        position: relative;
+        width: 100%;
+        margin-top: 100px;
+        justify-content: center;
+   
+
+}
+
+#inputnumber {
+    width: 50px;
+}
+
+.mr-3{
+    width: fit-content;
+    margin-left: 40px;
+}
+
+.d-flex{
+    padding: 0px;
+}
+.icontitle {
+    position: relative;
+    left: -14px
+}
+.card-textRemove {
+
+    position: relative;
+    width: 60px;
+    height: 40px;
+    
+}
+
+.fa-magnifying-glass {
+    position: relative;
+    top: 20px;
+}
+
+.card-desc{
+    width: 150px;
+
+}
+
+.card-img-top{
+
+height: 318px;
+    width: 318px
+}
+
+
+
+.itemImgInCart {
+
+   height: 118px;
+}
+@media (max-width: 768px) {
+    .itemsgrid {
+        grid-template-columns: 1fr;
+        
+    }
+    .contanterin{
+    
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    
+    
+}
+
+
+@media (max-width: 480px) {
+    .itemsgrid {
+        grid-template-columns: 1fr;
+
+    }
+    .contanterin {
+
+        max-width: 100%;
+        padding: 10px;
+    }
+  
+                
+
+            
+ 
+}
+
+@media (max-width: 452px) {
+        #inputnumber {
+        width: 20px;
+        }
+        
+        .mr-3 {
+        width: 50px;
+        margin-right: 10px;
+        height: 100px;
+        }
+        
+        .input-group .btn {
+        display: inline-flex;
+        height: 30px;
+        justify-content: center;
+        align-items: center;
+        }
+        
+        .card-desc {
+        
+        padding-left: 5px;
+        }
+        
+        .card-desc h5,
+        .card-desc p {
+        
+        font-size: 1rem;
+        }
+}
+@media (max-width: 363px) {
+
+   .itemImgInCart {
+
+       height: 123.38px;
+
+   }
+   }

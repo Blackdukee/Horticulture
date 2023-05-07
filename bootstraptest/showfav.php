@@ -6,7 +6,7 @@
 $servername = "localhost";
 $username = "brilliant";
 $password = "2112002";
-$dbname = "horticulturedb";
+$dbname = "horticulture";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -16,5 +16,13 @@ if ($conn->connect_error) {
 }
 
 
-$stmt = $conn->prepare("SELECT * FROM favorites WHERE article_id = ?");
+$query2 = mysqli_query($conn,"SELECT product_id FROM `favoritesproduct` where users_id = 1 ");
+$arrray = array();
+while ( $favarray = mysqli_fetch_array($query2)) {
 
+    array_push($arrray,$favarray['product_id']);
+    
+}
+
+
+echo json_encode($arrray);

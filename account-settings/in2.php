@@ -166,7 +166,7 @@ if(isset($_POST['submit'])){
 									    <h4>John Doe <small><i>Posted on February 19, 2016</i></small></h4>
 									    <p>Lorem ipsum...</p>
 									</div>
-								</li>';
+								</li>';         
 							  ?>
 								
 							</ul>

@@ -4,7 +4,7 @@
 $servername = "localhost";
 $username = "brilliant";
 $password = "2112002";
-$dbname = "horticulturedb";
+$dbname = "horticulture";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -21,7 +21,7 @@ if (isset($_POST['id'])) {
     $remove = $_POST['remove'];
 
     if ($remove == 'true') {
-        $sql = "DELETE FROM `favorites` WHERE article_id = $idToRemove";
+        $sql = "DELETE FROM `favoritesproduct` WHERE product_id = $idToRemove";
 
         if ($conn->query($sql) === TRUE) {
             echo "Record deleted successfully";
@@ -29,7 +29,7 @@ if (isset($_POST['id'])) {
             echo "Error deleting record: " . $conn->error;
         }
     } else {
-        $sql = "INSERT INTO `favorites`(`article_id`, `users_id`) VALUES ($idToRemove,1)";
+        $sql = "INSERT INTO `favoritesproduct` (`product_id`, `users_id`) VALUES ($idToRemove,1)";
         if ($conn->query($sql) === TRUE) {
             echo "Record inserted successfully";
         } else {
