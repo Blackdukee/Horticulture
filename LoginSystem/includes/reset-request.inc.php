@@ -15,7 +15,7 @@ if (isset($_POST["reset-request-submit"])) {
     $token  = random_bytes(32);
     
     // create url for the user to reset the password
-    $url = "http://localhost:3000/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    $url = "http://localhost/Horticulture/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
     $exires = date("U") + 1800;
     
@@ -80,11 +80,11 @@ if (isset($_POST["reset-request-submit"])) {
     $mail->send();
 
     echo "<script>alert('Message sent successfully');
-document.location.href='../home.html';
+document.location.href=' /Horticulture/home.html';
 </script>";
 
 
-    header("Location: ../reset-password.php?reset=success");
+    header("Location: /Horticulture/reset-password.php?reset=success");
 } else {
-    header("Location: ../index.php");
+    header("Location: /Horticulture/home.php");
 }

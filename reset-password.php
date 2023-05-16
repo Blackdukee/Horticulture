@@ -9,9 +9,9 @@
 </head>
 
 <body>
-    
+
     <!-- make reset password form -->
-    <form action="/LoginSystem/includes/reset-request.inc.php" method="post">
+    <form action="LoginSystem/includes/reset-request.inc.php" method="post">
         <input type="text" name="email" placeholder="Enter your email address...">
         <button type="submit" name="reset-request-submit">Receive new password by email</button>
     </form>

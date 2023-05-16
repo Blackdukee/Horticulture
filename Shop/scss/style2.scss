@@ -1,0 +1,454 @@
+
+
+.search-bar {
+    display: flex;
+    position: relative;
+    width: 375px;
+    height: 42px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.06);
+    flex-direction: column;
+}
+
+.search-bar .searchresult {
+    width: 100%;
+    border: 1px solid rgb(82, 74, 235);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.search-bar2 {
+
+    width: 375px;
+    height: 520px;
+    overflow-y: scroll;
+
+}
+
+.search-bar2::-webkit-scrollbar {
+    display: none;
+}
+
+.search-bar .searchresult input {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 8px 10px;
+}
+
+
+
+
+.search-bar .searchresult i {
+    padding-left: 10px;
+}
+
+.img-circle img{
+        
+            height: 50px;
+            width: 50px;
+            border-radius: 100%;
+            border: 5px solid #fff;
+}
+.img-circle{
+    position: relative;
+    margin-right: 20px;
+}
+
+
+ .container3 {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+ }
+
+ .col1 {
+    padding: 10px;
+    background: #eeede5;
+    
+ }
+
+ .col2 {
+     display: grid;
+     grid-template-rows: auto auto;
+ }
+
+ .col3 {
+     display: grid;
+     grid-template-columns: auto auto;
+ }
+
+ .col21 {
+     height: 300px;
+
+     padding: 10px;
+ }
+ 
+ .fa-heart:before {
+    position: relative;
+    left: 140%;
+    content: "\f004";
+    bottom: 100%;
+    top: -81px;
+}
+
+ [name="addbutton"] {
+
+     position: relative;
+     left: 10%;
+     width: 80%;
+     FONT-WEIGHT: 500;
+     height: fit-content;
+     margin-top: 10px;
+
+ }
+
+ .col22 {
+
+     height: 300px;
+
+ }
+
+
+
+
+
+.btn-group.dropstart .dropdown-toggle::before {
+    content: none;
+}
+
+
+
+
+
+.fa-gear{
+    position: relative;
+    bottom: 5px;
+    right: 5px;
+    
+}
+.product {
+
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+}
+
+.product img {
+
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.product-list {
+
+    padding: 20px 0px;
+    position: relative;
+    z-index: 1;
+    background-color: #fff;
+    padding-left: 10px;
+    width: 100%;
+    height: fit-content;
+
+}
+
+.product-list .item-details {
+    padding-left: 15px;
+
+}
+
+.product-list .item-details a{
+    text-decoration: none;
+    color: #1d1d1d;
+}
+
+.product .item-details h2 {
+
+    font-size: 20px;
+    color: #1d1d1d
+}
+
+.product .item-details h3 {
+
+    font-size: 18px;
+}
+
+
+.userpartation :nth-child(1) { 
+    
+    display: inline-block;
+}
+
+
+.fa-cart-plus {
+        margin-right: 20px;
+        height: fit-content;
+        width: fit-content;
+        margin-top: 25px;
+        
+}
+
+.GridSys p {
+    transition: color 200ms ease;
+    color: #232722;
+    line-height: 20px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+
+footer{ 
+    
+    position: relative;
+    bottom: -10px;
+}
+
+.GridSys{ 
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px 15px;
+    width: fit-content;
+    
+}
+
+.GridSys :nth-child(1){
+    
+    border-radius: 0;
+}
+.itemsgrid {
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px 30px;
+    width: fit-content;
+}
+
+
+.form-outline {
+   width: fit-content;
+
+}
+
+.pagination {
+    margin-top: 30px;
+}
+
+.model-body {
+    margin-bottom: -20px;
+}
+
+.card-title a{
+    text-decoration: none;
+    color:black;
+
+}
+.card i {
+    align-items: right;
+}
+   .intro {
+
+   background-color: #d0d4ca;
+   width: 100%;
+   height: 350px;
+
+   }
+
+   .bg {
+
+   position: relative;
+   height: inherit;
+   width: 60%;
+   left: 40%;
+   }
+
+   .bg img {
+
+   height: 350px;
+
+
+   }
+.category{ 
+    display: flex;
+    position: relative;
+}
+.cat { 
+    
+    position: relative;
+    height: 65px;
+    width: 90%;
+    left: 5%;
+    margin-bottom: 15px;
+}
+
+.catnav { 
+    position: relative;
+        height: 65px;
+        width: 90%;
+        left: 5%;
+        margin-bottom: 15px;
+}
+.spinner-border {
+    position: relative;
+    top: 50%;
+    left: 45%;
+    right: 50%;
+}
+
+
+.container2 {
+        display: flex;
+        position: relative;
+        width: 100%;
+        justify-content: center;
+}
+.containerr{
+
+         display: flex;
+        position: relative;
+        width: 100%;
+        margin-top: 100px;
+        justify-content: center;
+   
+
+}
+
+#inputnumber {
+    width: 50px;
+}
+
+.mr-3{
+    width: fit-content;
+    margin-left: 40px;
+}
+
+.d-flex{
+    padding: 0px;
+}
+.icontitle {
+    position: relative;
+    left: -14px
+}
+.card-textRemove {
+
+    position: relative;
+    width: 60px;
+    height: 40px;
+    
+}
+
+.fa-magnifying-glass {
+    position: relative;
+    top: 20px;
+}
+
+.card-desc{
+    width: 150px;
+
+}
+
+.card-img-top{
+
+height: 318px;
+    width: 318px
+}
+
+
+
+.itemImgInCart {
+
+   height: 118px;
+}
+@media (max-width: 768px) {
+    .itemsgrid {
+        grid-template-columns: 1fr;
+        
+    }
+    
+    .GridSys{
+            grid-template-columns: 1fr;
+    }
+    .contanterin{
+    
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    
+    
+}
+
+
+@media (max-width: 480px) {
+    .itemsgrid {
+        grid-template-columns: 1fr;
+
+    }
+    
+    .GridSys{
+            grid-template-columns: 1fr;
+    }
+    
+   .bg img {
+       height: 350px;
+       margin-right: 75%;
+       width: 350px;
+   }
+    .contanterin {
+
+        max-width: 100%;
+        padding: 10px;
+    }
+  
+                
+
+            
+ 
+}
+
+@media (max-width: 452px) {
+        #inputnumber {
+        width: 20px;
+        }
+        
+        .mr-3 {
+        width: 50px;
+        margin-right: 10px;
+        height: 100px;
+        }
+        
+        .input-group .btn {
+        display: inline-flex;
+        height: 30px;
+        justify-content: center;
+        align-items: center;
+        }
+        
+        .card-desc {
+        
+        padding-left: 5px;
+        }
+        
+        .card-desc h5,
+        .card-desc p {
+        
+        font-size: 1rem;
+        }
+}
+@media (max-width: 363px) {
+
+   .itemImgInCart {
+
+       height: 123.38px;
+
+   }
+   }

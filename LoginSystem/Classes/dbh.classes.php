@@ -5,26 +5,22 @@ class Dbh {
         $username = "brilliant"; 
         $password = "2112002";
         $dbName = "horticulture";
-        $dbh = new PDO('mysql:host=localhost;dbname=horticulture', $username, $password);
+        // $dbh = new PDO('mysql:host=localhost;dbname=horticulture', $username, $password);
+        $dbh = new mysqli('localhost', $username, $password, $dbName);
         return $dbh;
         
-        }catch(PDOException $e){
+        }catch(mysqli_sql_exception $e){
             echo "Connection failed: " . $e->getMessage();
             die();
         }
     }
     
     public function showFavArticles($id){
-        $dbh = $this->connect();
-        $sql = "SELECT * FROM `articles` WHERE `article_id` in (SELECT `article_id` FROM `favorites` WHERE `users_id` = ?)";
-        $stmt = $dbh->prepare($sql);
+            
+        $query = mysqli_query($this->connect(), "SELECT * FROM articles WHERE users_id = '$id'");
         
-        if($stmt->execute([$id])){
-            $result = $stmt->fetchAll();
-            return $result;
-        }else{
-            echo "Error: " . $sql . "<br>" ;
-        }
+        return $query;
+    
         
     }
     

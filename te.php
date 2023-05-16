@@ -36,7 +36,7 @@
                  if(in_array($fileType, $allowTypes)){ 
                  
                     $image = $_FILES['file']['tmp_name']; 
-                    $imgContent = addslashes(file_get_contents($image)); 
+                    $imgContent = file_get_contents($image); 
                 $up = new UpdateDataContr();
                 $up->updateDataContr($name, $address, $phone, $imgContent, $email);
                 

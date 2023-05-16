@@ -7,18 +7,21 @@ class SignupContr extends Sginup {
     private $UserPassword;
     private $UserPasswordRe;
     
-    public function __construct($UserName, $UserEmail,$UserPhone, $UserPassword, $UserPasswordRe) {
-    
+    private $UserAddress;
+
+    public function __construct($UserName, $UserEmail, $UserPhone, $UserPassword, $UserPasswordRe, $UserAddress)
+    {
+
         $this->UserName = $UserName;
         $this->UserEmail = $UserEmail;
         $this->UserPhone = $UserPhone;
         $this->UserPassword = $UserPassword;
         $this->UserPasswordRe = $UserPasswordRe;
+        $this->UserAddress = $UserAddress;
     }
-    
     public function signupUser(){
         if($this->emptyInput() !== false){
-            header("Location: ../signup.php?error=emptyinput{$this->UserName}");
+            header("Location: /Horticulture/signup.php?error=emptyinput{$this->UserName}");
             exit();
         }
         if($this->invalidUid() !== false){
@@ -41,7 +44,7 @@ class SignupContr extends Sginup {
             header("Location: /Horticulture/signup.php?error=invalidphone");
             exit();
         }
-        $this->createUser($this->UserName, $this->UserEmail,$this->UserPhone,$this->UserPassword);
+        $this->createUser($this->UserName, $this->UserEmail,$this->UserPhone,$this->UserPassword, $this->UserAddress);
     }
     public function invalidPhone(){
         $result = false;
@@ -54,7 +57,7 @@ class SignupContr extends Sginup {
     }
     public function emptyInput() {
         $result = null;
-        if(empty($this->UserName) || empty($this->UserEmail) || empty($this->UserPassword) || empty($this->UserPasswordRe || empty($this->UserPhone))){
+        if(empty($this->UserName) || empty($this->UserEmail) || empty($this->UserPassword) || empty($this->UserPasswordRe || empty($this->UserPhone)|| empty($this->UserAddress))){
             $result = true;
         } else {
             $result = false;
@@ -63,7 +66,7 @@ class SignupContr extends Sginup {
     }
     public function invalidUid(){
         $result = false;
-        if(!preg_match("/^[a-zA-Z0-9]*$/", $this->UserName)){
+        if(!preg_match('/^[a-zA-Z\s]{2,50}$/', $this->UserName)){
             $result = true;
         } else {
             $result = false;
@@ -99,5 +102,3 @@ class SignupContr extends Sginup {
         return $result;
     }
 }
-
-

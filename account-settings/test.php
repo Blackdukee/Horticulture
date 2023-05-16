@@ -1,18 +1,29 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
 
-if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
-    if (isset($_POST['submit'])) {
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
-    }
-}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 
-   $fileName = basename($_FILES["file"]["name"]);
-    $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
-echo "Name: ".$name."<br>".$email."<br>".$phone ."<br>".$fileName."<br>".$fileType."<br>";
+<body>
+    <?php  
+    $one= 32;
+    if($one==32){
+    ?>
+
+    <h1>yes</h1>
+    <?php }
+    
+    else{
+    ?>
+    <h1>no</h1>
+    <?php } ?>
 
 
- 
 
+</body>
 
+</html>

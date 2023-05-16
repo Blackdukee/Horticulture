@@ -13,10 +13,10 @@ if (isset($_POST["reset-password-submit"])) {
     $password  = $_POST["pwd"];
     $repassword = $_POST["pwd-repeat"];
     if (empty($password) || empty($repassword)) {
-        header("Location: ../create-new-password.php?newpwd=empty");
+        header("Location: /Horticulture/create-new-password.php?newpwd=empty");
         exit();
     } else if ($password != $repassword) {
-        header("Location: ../create-new-password.php?newpwd=pwdnotsame");
+        header("Location: /Horticulture/create-new-password.php?newpwd=pwdnotsame");
         exit();
     }
     // this current time is used to check if the token is expired or not
@@ -91,7 +91,7 @@ if (isset($_POST["reset-password-submit"])) {
                         } else {
                             mysqli_stmt_bind_param($stmt, "s", $tokenEmail);
                             mysqli_stmt_execute($stmt);
-                            header("Location: ../login.php?newpwd=passwordupdated");
+                            header("Location: /Horticulture/login.php?newpwd=passwordupdated");
                         }
                     }
                 }
@@ -99,5 +99,5 @@ if (isset($_POST["reset-password-submit"])) {
         }
     }
 } else {
-    header("Location: ../home.php");
+    header("Location: /Horticulture/home.php");
 }
