@@ -1,5 +1,19 @@
+.PostBody {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
 
-
+.PostBody div {
+    margin-top: 50px;
+    width: 80%;
+}
+body {
+    background-image: url(/Horticulture/bg3.jpg);
+    background-size: cover;
+    background-repeat: repeat-y;
+    overflow-x: hidden;
+}
 .search-bar {
     display: flex;
     position: relative;
@@ -9,6 +23,7 @@
     border-radius: 15px;
     box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.06);
     flex-direction: column;
+    left: 25%;
 }
 
 .search-bar .searchresult {
@@ -212,11 +227,15 @@ footer{
     bottom: -10px;
 }
 
+footer img{ 
+    margin-top: 20px;
+}
+
 .GridSys{ 
     position: relative;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px 15px;
+    gap: 30px 15px ;
     width: fit-content;
     
 }
@@ -246,7 +265,16 @@ footer{
 .model-body {
     margin-bottom: -20px;
 }
+.var {
 
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+}
+
+.var li {
+    margin-left: 10px;
+}
 .card-title a{
     text-decoration: none;
     color:black;
@@ -368,11 +396,18 @@ height: 318px;
 
    height: 118px;
 }
+@media (max-width:991px){ 
+.search-bar {
+        left: 0;
+    }
+
+}
 @media (max-width: 768px) {
     .itemsgrid {
         grid-template-columns: 1fr;
         
     }
+
     
     .GridSys{
             grid-template-columns: 1fr;

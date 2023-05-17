@@ -1,5 +1,7 @@
 <?php
 
+session_start(); 
+
 // Set up database connection
 
 include 'dbconnect.php';
@@ -16,13 +18,12 @@ if ($conn->connect_error) {
 
 if(isset($_POST['id'])){
     $itemid = $_POST['id'];
-    $userid = 1;
 }
 
 
 // delete items from cart table
 
-$query = mysqli_query($conn,"DELETE FROM `cart` WHERE `product_id` = $itemid and `user_id` = $userid");
+$query = mysqli_query($conn,"DELETE FROM `cart` WHERE `product_id` = $itemid and `user_id` = ".$_SESSION['userid']);
 
 if($query){
     echo "success";

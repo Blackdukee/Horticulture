@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 // Set up database connection
 
 include 'dbconnect.php';
@@ -14,7 +15,6 @@ if ($conn->connect_error) {
 
 if(isset($_POST['id'])){
     $itemid = $_POST['id'];
-    $userid = 1;
     if(isset($_POST['val'])){
         $val = $_POST['val'];
     
@@ -26,7 +26,7 @@ if(isset($_POST['id'])){
 // insert data into cart table
 
 
-$query = mysqli_query($conn,"SELECT product_id FROM `cart` where `user_id` = 1");
+$query = mysqli_query($conn,"SELECT product_id FROM `cart` where `user_id` =".$_SESSION['userid']);
 
 // Make an array of the cart items ids
 

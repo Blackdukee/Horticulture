@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 
 
 include 'dbconnect.php';
@@ -11,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 
-$query2 = mysqli_query($conn,"SELECT product_id FROM `favoritesproduct` where users_id = 1 ");
+$query2 = mysqli_query($conn,"SELECT product_id FROM `favoritesproduct` where users_id =".$_SESSION['userid']);
 $arrray = array();
 while ( $favarray = mysqli_fetch_array($query2)) {
 

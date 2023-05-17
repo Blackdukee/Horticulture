@@ -1,5 +1,7 @@
 <?php
 
+session_start(); 
+
 // Set up database connection
 
 include 'dbconnect.php';
@@ -27,7 +29,7 @@ if (isset($_POST['id'])) {
             echo "Error deleting record: " . $conn->error;
         }
     } else {
-        $sql = "INSERT INTO `favoritesproduct` (`product_id`, `users_id`) VALUES ($idToRemove,1)";
+        $sql = "INSERT INTO `favoritesproduct` (`product_id`, `users_id`) VALUES ($idToRemove, ".$_SESSION['userid'].")";
         if ($conn->query($sql) === TRUE) {
             echo "Record inserted successfully";
         } else {

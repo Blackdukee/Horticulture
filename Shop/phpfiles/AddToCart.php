@@ -1,5 +1,5 @@
-<?php 
-
+<?php
+session_start();  // start session
 include 'dbconnect.php';
 
 $conn = Dbconnect::getInstance()->getConnection();
@@ -12,9 +12,6 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTE
         
         if(isset($_POST['id'])){
             $itemid = $_POST['id'];
-            $userid = 1;
-            echo $itemid;
-            echo $userid;
         }
         
         
@@ -38,7 +35,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && !empty($_SERVER['HTTP_X_REQUESTE
         
        
         // insert item in the cart table
-        $sql = "INSERT INTO `cart` (`product_id`, `user_id`) VALUES ('$itemid', '$userid')";
+        $sql = "INSERT INTO `cart` (`product_id`, `user_id`) VALUES ('$itemid', '".$_SESSION['userid']."')";
         
            if ($conn->query($sql) === TRUE) {
                    echo "New record created successfully";

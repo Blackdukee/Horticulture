@@ -1,5 +1,8 @@
 <?php 
 
+session_start(); 
+
+
 // Set up database connection
 
 include 'dbconnect.php';

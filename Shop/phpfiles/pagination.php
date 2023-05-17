@@ -37,7 +37,7 @@ if(isset($_POST['id'])){
 $start_from = ($page-1 )* $limit;
 $query = mysqli_query($conn,"SELECT * FROM `product` where product_type like $catagory LIMIT $start_from, $limit ");
 
-$query2 = mysqli_query($conn,"SELECT product_id FROM `favoritesproduct` where users_id = 1 ");
+$query2 = mysqli_query($conn,"SELECT product_id FROM `favoritesproduct` where users_id =".$_SESSION['userid']);
 $arrray = array();
 while ( $favarray = mysqli_fetch_array($query2)) {
 
